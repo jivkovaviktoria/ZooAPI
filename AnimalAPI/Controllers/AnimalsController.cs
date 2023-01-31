@@ -22,6 +22,16 @@ public class AnimalsController : Controller
     {
         return Ok(await this._context.Animals.ToListAsync());
     }
+    
+    [HttpGet]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> GetAnimalByIdAsync([FromRoute] Guid id)
+    {
+        var animal = await this._context.Animals.FindAsync(id);
+        if (animal is null) return NotFound("Id not found");
+
+        return Ok(animal);
+    }
 }
     
     
