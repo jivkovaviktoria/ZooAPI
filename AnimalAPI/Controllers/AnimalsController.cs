@@ -51,6 +51,26 @@ public class AnimalsController : Controller
 
         return Ok(animal);
     }
+    
+    [HttpPut]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> UpdateAnimalAsync([FromRoute] Guid id, AnimalAddInputModel animalInputModel)
+    {
+        var animal = await this._context.Animals.FindAsync(id);
+
+        if (animal is not null)
+        {
+            animal.Name = animalInputModel.Name;
+            animal.Age = animalInputModel.Age;
+            animal.Color = animalInputModel.Color;
+            animal.Type = animalInputModel.Type;
+
+            await this._context.SaveChangesAsync();
+            return Ok(animal);
+        }
+
+        return NotFound("Id not found");
+    }
 }
     
     
