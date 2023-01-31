@@ -71,6 +71,20 @@ public class AnimalsController : Controller
 
         return NotFound("Id not found");
     }
+    
+    [HttpDelete]
+    [Route("{id:guid}")]
+    public async Task<IActionResult> DeleteAnimalAsync([FromRoute] Guid id)
+    {
+        var animal = await this._context.Animals.FindAsync(id);
+
+        if (animal is null) return NotFound("Id not found");
+
+        this._context.Remove(animal);
+        await this._context.SaveChangesAsync();
+
+        return Ok(animal);
+    }
 }
     
     
