@@ -32,6 +32,25 @@ public class AnimalsController : Controller
 
         return Ok(animal);
     }
+    
+    
+    [HttpPost]
+    public async Task<IActionResult> AddAnimalAsync(AnimalAddInputModel animalInputModel)
+    {
+        var animal = new Animal()
+        {
+            Id = new Guid(),
+            Name = animalInputModel.Name,
+            Age = animalInputModel.Age,
+            Color = animalInputModel.Color,
+            Type = animalInputModel.Type
+        };
+
+        await this._context.AddAsync(animal);
+        await this._context.SaveChangesAsync();
+
+        return Ok(animal);
+    }
 }
     
     
