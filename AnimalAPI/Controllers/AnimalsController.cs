@@ -20,7 +20,15 @@ public class AnimalsController : Controller
     [HttpGet]
     public async Task<IActionResult> GetAnimalsAsync()
     {
-        return Ok(await this._context.Animals.ToListAsync());
+        return Ok(await this._context.Animals.Select(x => new
+        {
+            Id = x.Id,
+            Name = x.Name,
+            Age = x.Age,
+            Color = x.Color,
+            Type = x.Type,
+            ZooId  = x.Zoo.Id
+        }).ToListAsync());
     }
     
     [HttpGet]
