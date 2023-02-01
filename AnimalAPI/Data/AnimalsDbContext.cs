@@ -9,4 +9,5 @@ public class AnimalsDbContext : DbContext
     { }
 
     public DbSet<Animal> Animals { get; set; }
+    public DbSet<Zoo> Zoos { get; set; }
 }

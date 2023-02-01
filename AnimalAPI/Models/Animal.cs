@@ -1,4 +1,6 @@
-﻿namespace AnimalAPI.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AnimalAPI.Models;
 
 public class Animal
 {
@@ -7,4 +9,7 @@ public class Animal
     public int Age { get; set; }
     public string Color { get; set; }
     public string Type { get; set; }
+
+    public Guid? ZooId { get; set; } 
+    public virtual Zoo Zoo { get; set; }
 }
