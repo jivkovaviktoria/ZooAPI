@@ -10,6 +10,6 @@ public class Animal
     public string Color { get; set; }
     public string Type { get; set; }
 
-    public Guid? ZooId { get; set; } 
+    public Guid ZooId { get; set; } 
     public virtual Zoo Zoo { get; set; }
 }
