@@ -1,4 +1,4 @@
-﻿namespace AnimalAPI.Models.InputModels;
+﻿namespace ZooAPI.Models.InputModels;
 
 public class AnimalAddInputModel
 {

@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace AnimalAPI.Models;
-
+﻿namespace ZooAPI.Models;
 public class Animal
 {
     public Guid Id { get; set; }

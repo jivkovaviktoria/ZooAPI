@@ -1,10 +1,10 @@
-﻿using AnimalAPI.Data;
-using AnimalAPI.Models;
-using AnimalAPI.Models.InputModels;
+﻿using ZooAPI.Data;
+using ZooAPI.Models;
+using ZooAPI.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace AnimalAPI.Controllers;
+namespace ZooAPI.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

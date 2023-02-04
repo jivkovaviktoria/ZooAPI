@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AnimalAPI.Models;
+namespace ZooAPI.Models;
 
 public class Zoo
 {

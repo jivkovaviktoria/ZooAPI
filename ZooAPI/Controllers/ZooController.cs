@@ -1,8 +1,7 @@
-﻿using AnimalAPI.Data;
+﻿using ZooAPI.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace AnimalAPI.Controllers
+namespace ZooAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

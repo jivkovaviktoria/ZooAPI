@@ -1,4 +1,4 @@
-using AnimalAPI.Data;
+using ZooAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
