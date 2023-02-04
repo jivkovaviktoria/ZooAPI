@@ -44,4 +44,8 @@
       <ProjectReference Include="ZooAPI.Data\ZooAPI.Data.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="ZooAPI.Core" />
+    </ItemGroup>
+
 </Project>

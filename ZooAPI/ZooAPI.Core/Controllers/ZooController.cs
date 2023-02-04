@@ -1,6 +1,7 @@
 ﻿using AnimalAPI.Services;
 using ZooAPI.Data;
 using Microsoft.AspNetCore.Mvc;
+using ZooAPI.Data.Common;
 using ZooAPI.Data.Models;
 
 namespace ZooAPI.Controllers
@@ -27,7 +28,7 @@ namespace ZooAPI.Controllers
         public async Task<IActionResult> GetZooById([FromRoute] Guid id)
         {
             var zoo = this._zooService.Zoos.GetAsync(id);
-            if (zoo is null) return NotFound("Zoo not found");
+            if (zoo is null) return NotFound(GlobalConstants.ZooNotFound);
             
             return Ok(zoo);
         }
@@ -38,7 +39,7 @@ namespace ZooAPI.Controllers
             var result = this._zooService.Zoos.CreateAsync(zoo);
             this._zooService.Save();
 
-            if (result == false) return Problem("Not successfull");
+            if (result == false) return Problem(GlobalConstants.UnsuccessfulOperation);
             return CreatedAtAction(nameof(GetZooById), new {Id = zoo.Id}, zoo);
         }
 
@@ -48,7 +49,7 @@ namespace ZooAPI.Controllers
             var result = this._zooService.Zoos.UpdateAsync(zoo);
             this._zooService.Save();
 
-            if (result == false) return Problem("Not Successfull");
+            if (result == false) return Problem(GlobalConstants.UnsuccessfulOperation);
             return Ok();
         }
 
@@ -58,7 +59,7 @@ namespace ZooAPI.Controllers
             var result = this._zooService.Zoos.DeleteAsync(id);
             this._zooService.Save();
 
-            if (result == false) return Problem("Not Successdull");
+            if (result == false) return Problem(GlobalConstants.UnsuccessfulOperation);
             return Ok();
         }
     }
