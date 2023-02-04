@@ -1,5 +1,7 @@
-﻿using ZooAPI.Data;
+﻿using AnimalAPI.Services;
+using ZooAPI.Data;
 using Microsoft.AspNetCore.Mvc;
+using ZooAPI.Data.Models;
 
 namespace ZooAPI.Controllers
 {
@@ -7,46 +9,57 @@ namespace ZooAPI.Controllers
     [Route("api/[controller]")]
     public class ZooController : Controller
     {
-        private readonly AnimalsDbContext _context;
-        public ZooController(AnimalsDbContext context)
+        private readonly IService _zooService;
+        public ZooController(ZooDbContext context)
         {
-            _context = context;
+            this._zooService = new ZooService(context);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetZoosAsync()
+        public async Task<IActionResult> GetZoos()
         {
-            var zoos = this._context.Zoos.Select(x => new
-            {
-                id = x.Id,
-                Name = x.Name,
-                City = x.City,
-                Animals = x.Animals.ToList()
-            });
-
+            var zoos = this._zooService.Zoos.GetManyAsync();
             return Ok(zoos);
         }
 
         [HttpGet]
         [Route("{id:guid}")]
-        public async Task<IActionResult> GetZooByIdAsync([FromRoute] Guid id)
+        public async Task<IActionResult> GetZooById([FromRoute] Guid id)
         {
-            var zoo = await this._context.Zoos.FindAsync(id);
+            var zoo = this._zooService.Zoos.GetAsync(id);
+            if (zoo is null) return NotFound("Zoo not found");
             
-            if (zoo is null) return NotFound("Id not found");
             return Ok(zoo);
         }
 
-        [HttpGet]
-        [Route("Animals/{id:guid}")]
-        public async Task<IActionResult> GetZooAnimalsAsync([FromRoute] Guid id)
+        [HttpPost]
+        public async Task<IActionResult> Create(Zoo zoo)
         {
-            var zoo = await this._context.Zoos.FindAsync(id);
-            
-            if (zoo is null) return NotFound("id not found");
+            var result = this._zooService.Zoos.CreateAsync(zoo);
+            this._zooService.Save();
 
-            var animals = zoo.Animals.ToList();
-            return Ok(animals);
+            if (result == false) return Problem("Not successfull");
+            return CreatedAtAction(nameof(GetZooById), new {Id = zoo.Id}, zoo);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Zoo zoo)
+        {
+            var result = this._zooService.Zoos.UpdateAsync(zoo);
+            this._zooService.Save();
+
+            if (result == false) return Problem("Not Successfull");
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = this._zooService.Zoos.DeleteAsync(id);
+            this._zooService.Save();
+
+            if (result == false) return Problem("Not Successdull");
+            return Ok();
         }
     }
 }

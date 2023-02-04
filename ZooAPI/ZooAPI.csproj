@@ -18,4 +18,30 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="ZooAPI.Data\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="ZooAPI.Data\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="ZooAPI.Data\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="ZooAPI.Data\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="ZooAPI.Data\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="ZooAPI.Data\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="ZooAPI.Data\obj\ZooAPI.Data.csproj.nuget.dgspec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="ZooAPI.Data\ZooAPI.Data.csproj" />
+    </ItemGroup>
+
 </Project>
