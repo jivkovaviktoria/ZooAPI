@@ -1,4 +1,4 @@
-<h1 align="center">AnimalsAPI</h1>
+<h1 align="center">ZooAPI</h1>
 
 This repository contains a .net6 - based simple API (crud)
 
