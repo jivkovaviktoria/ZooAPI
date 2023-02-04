@@ -5,6 +5,7 @@ namespace ZooAPI.Data;
 
 public class ZooDbContext : DbContext
 {
+    public ZooDbContext() { }
     public ZooDbContext(DbContextOptions options) : base(options)
     { }
 
@@ -20,5 +21,14 @@ public class ZooDbContext : DbContext
         modelBuilder.Entity<Zoo>().HasKey(z => z.Id);
         modelBuilder.Entity<Zoo>().Property(z => z.Name).IsRequired();
         modelBuilder.Entity<Zoo>().Property(z => z.Location).IsRequired();
+
+        modelBuilder.Entity<Animal>().HasOne(a => a.Zoo)
+            .WithMany(z => z.Animals)
+            .HasForeignKey(a => a.ZooId);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
     }
 }
